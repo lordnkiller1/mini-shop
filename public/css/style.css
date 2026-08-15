@@ -1,0 +1,281 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    background: #f3f6fb;
+    color: #172033;
+    font-family: Tahoma, Arial, sans-serif;
+    direction: rtl;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+/* Layout */
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    padding: 32px 22px;
+    color: #ffffff;
+    background: linear-gradient(180deg, #111827 0%, #1e293b 100%);
+    box-shadow: -8px 0 25px rgba(15, 23, 42, 0.12);
+}
+
+.brand {
+    padding: 0 12px 30px;
+    font-size: 25px;
+    font-weight: 800;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brand span {
+    display: block;
+    margin-top: 8px;
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.sidebar-menu {
+    margin-top: 30px;
+}
+
+.menu-item {
+    display: block;
+    margin-bottom: 10px;
+    padding: 13px 15px;
+    color: #cbd5e1;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.menu-item:hover {
+    color: #ffffff;
+    background: rgba(59, 130, 246, 0.18);
+    transform: translateX(-3px);
+}
+
+/* Main content */
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.topbar {
+    min-height: 105px;
+    padding: 24px 38px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topbar h1 {
+    margin: 0 0 7px;
+    font-size: 24px;
+}
+
+.topbar p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.topbar-button {
+    padding: 11px 18px;
+    color: #ffffff;
+    background: #2563eb;
+    text-decoration: none;
+    border-radius: 9px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.topbar-button:hover {
+    background: #1d4ed8;
+}
+
+.page-content {
+    padding: 38px;
+}
+
+/* Card */
+
+.card {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e7ecf3;
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+}
+
+.card-header {
+    padding: 25px 28px;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.card-header h2 {
+    margin: 0 0 8px;
+    font-size: 21px;
+}
+
+.card-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.card-body {
+    padding: 28px;
+}
+
+/* Form */
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.form-input {
+    display: block;
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    color: #172033;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.form-input::placeholder {
+    color: #9ca3af;
+}
+
+.form-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+/* Checkbox فقط اندازه طبیعی دارد */
+
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 11px 14px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.checkbox-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: #2563eb;
+    cursor: pointer;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    padding-top: 8px;
+}
+
+.submit-button {
+    min-width: 120px;
+    padding: 12px 24px;
+    color: #ffffff;
+    background: #2563eb;
+    border: 0;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.submit-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.cancel-button {
+    padding: 12px 22px;
+    color: #475569;
+    background: #f1f5f9;
+    text-decoration: none;
+    border-radius: 9px;
+}
+
+.cancel-button:hover {
+    background: #e2e8f0;
+}
+
+.validation-error {
+    display: block;
+    margin-top: 7px;
+    color: #dc2626;
+    font-size: 12px;
+}
+
+/* Responsive */
+
+@media (max-width: 800px) {
+    .admin-layout {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .sidebar-menu {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+    }
+
+    .menu-item {
+        white-space: nowrap;
+    }
+
+    .topbar {
+        padding: 20px;
+    }
+
+    .page-content {
+        padding: 20px;
+    }
+}

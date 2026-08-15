@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
+
+class Category extends Model
+{
+    use SoftDeletes;
+    protected $fillable = [
+        'title',
+        'status',
+    ];
+
+    protected static function booted()
+    {
+        static::creating(function ($product) {
+
+            $product->slug = Str::slug($product->title);
+        });
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    #[Scope]
+    protected function filter(Builder $query, array $filters): void
+    {
+        if (!empty($filters['search'])) {
+            $query->where(
+                'title',
+                'like',
+                '%' . $filters['search'] . '%'
+            );
+        }
+
+        if (isset($filters['status']) && $filters['status'] !== '') {
+            $query->where(
+                'status',
+                $filters['status']
+            );
+        }
+    }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+}
