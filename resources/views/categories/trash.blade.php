@@ -28,7 +28,7 @@
 
 
         <x-slot:description>
-            تعداد موارد حذف شده: {{ $categories->total() }}
+            تعداد موارد حذف شده: {{ $categories->count() }}
         </x-slot:description>
 
 
