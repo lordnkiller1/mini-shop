@@ -21,6 +21,7 @@ class ProductController extends Controller implements HasMiddleware
         $products = Product::with('category', 'image')
         ->filter($request->only(['search','category_id','status']))->latest()->paginate(10)->withQueryString();
         $categories = Category::all();
+        
         return view('products.index', compact('products','categories'));
     }
 

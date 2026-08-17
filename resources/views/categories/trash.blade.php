@@ -59,7 +59,7 @@
 
                                 <x-can permission="restore_category">
 
-                                    <form action="{{ route('categories.restore', $category->id) }}" method="POST"
+                                    <form action="{{ route('categories.restore', $category) }}" method="POST"
                                         style="margin:0;">
 
                                         @csrf

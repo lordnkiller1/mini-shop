@@ -140,7 +140,7 @@ class CategoryController extends Controller implements HasMiddleware
     }
     public function trash()
     {
-        $categories = Category::onlyTrashed()->get();
+        $categories = Category::onlyTrashed()->latest('deleted_at')->paginate(10);
         return view('categories.trash', compact('categories'));
     }
     public function restore(Category $category)

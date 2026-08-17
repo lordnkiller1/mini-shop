@@ -120,7 +120,7 @@ class UserController extends Controller implements HasMiddleware
 
         $user->roles()->sync($data['roles'] ?? []);
 
-        return to_route('users.index')->with('success', 'دسته‌بندی با موفقیت ویرایش شد');
+        return to_route('users.index')->with('success', 'کاربر با موفقیت ویرایش شد');
     }
 
     /**
@@ -129,5 +129,7 @@ class UserController extends Controller implements HasMiddleware
     public function destroy(User $user)
     {
         $user->delete();
+
+        return to_route('users.index')->with('success', 'کاربر با موفقیت حذف شد');
     }
 }

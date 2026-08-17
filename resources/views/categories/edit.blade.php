@@ -15,7 +15,7 @@
 
 
     <form
-        action="{{ route('categories.update', $category->id) }}"
+        action="{{ route('categories.update', $category) }}"
         method="POST"
         enctype="multipart/form-data"
     >

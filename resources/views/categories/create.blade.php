@@ -68,7 +68,7 @@
 
             <a
                 href="{{ route('categories.index') }}"
-                class="cancel-button"
+                class="cancel-button btn btn-primary"
             >
                 انصراف
             </a>
