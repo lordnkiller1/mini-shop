@@ -96,15 +96,13 @@
 
         <x-table :headers="$headers">
 
-            @php
-                $row = 1;
-            @endphp
+
             @foreach ($products as $product)
                 <tr style="border-bottom:1px solid #eee;">
 
 
                     <td style="padding:12px;">
-                        {{ $row }}
+                        {{ $products->firstItem() + $loop->index }}
                     </td>
 
 

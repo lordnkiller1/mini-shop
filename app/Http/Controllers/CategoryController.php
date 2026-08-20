@@ -130,13 +130,20 @@ class CategoryController extends Controller implements HasMiddleware
      */
     public function destroy(Category $category)
     {
-        if ($category->image) {
-            Storage::disk('public')->delete($category->image->path);
-            $category->image()->delete();
+        if ($category->products()->exists()) {
+
+            return back()->with(
+                'error',
+                'این دسته بندی دارای محصول است و قابل حذف نیست'
+            );
         }
+
         $category->delete();
 
-        return to_route('categories.index')->with('success', 'دسته‌بندی حذف شد');
+        return back()->with(
+            'success',
+            'دسته بندی حذف شد'
+        );
     }
     public function trash()
     {
@@ -146,6 +153,10 @@ class CategoryController extends Controller implements HasMiddleware
     public function restore(Category $category)
     {
         $category->restore();
-        return to_route('categories.trash');
+
+        return to_route('categories.trash')->with(
+            'success',
+            'دسته بندی بازگردانی شد'
+        );
     }
 }

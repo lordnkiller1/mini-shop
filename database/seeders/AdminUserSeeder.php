@@ -12,28 +12,22 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
 
-        $adminRole = Role::where('name','admin')
+        $adminRole = Role::where('name', 'admin')
             ->firstOrFail();
 
 
 
-        $user = User::firstOrCreate(
-
-            [
-                'email' => 'admin@gmail.com'
-            ],
-
-            [
-                'name' => 'Admin',
-                'password' => Hash::make('12345678'),
-            ]
-
-        );
+        $user = User::create([
+            'name' => env('ADMIN_NAME'),
+            'email' => env('ADMIN_EMAIL'),
+            'password' => Hash::make(
+                env('ADMIN_PASSWORD')
+            ),
+        ]);
 
 
         $user->roles()->sync([
             $adminRole->id
         ]);
-
     }
 }

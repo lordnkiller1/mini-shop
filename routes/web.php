@@ -28,10 +28,10 @@ Route::middleware('auth')->group(function () {
         ->withTrashed()
         ->name('categories.restore');
 
-    Route::resource('categories', CategoryController::class);
-    Route::resource('products', ProductController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('products.comments', CommentController::class)->scoped()->only(['index','store','update','destroy']);
+    Route::resource('categories', CategoryController::class)->except('show');
+    Route::resource('products', ProductController::class)->except('show');
+    Route::resource('users', UserController::class)->except('show');
+    Route::resource('products.comments', CommentController::class)->except('show')->scoped()->only(['index','store','update','destroy']);
 });
 
 require __DIR__ . '/auth.php';

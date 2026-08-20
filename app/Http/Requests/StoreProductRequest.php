@@ -24,11 +24,15 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required','string','min:3','max:100',Rule::unique('products', 'title')],
-            'status' => ['required','boolean'],
-            'price' => ['required','numeric','min:0'],
-            'category_id' => ['required','exists:categories,id'],
-            'image' => ['nullable','image','max:2048'],
+            'title' => ['required', 'string', 'min:3', 'max:100', Rule::unique('products', 'title')],
+            'status' => ['required', 'boolean'],
+            'price' => [
+                'required',
+                'integer',
+                'min:0'
+            ],
+            'category_id' => ['required', 'exists:categories,id'],
+            'image' => ['nullable', 'image', 'max:2048'],
         ];
     }
 }

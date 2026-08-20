@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\storeUserRequest as RequestsStoreUserRequest;
+use App\Http\Requests\StoreUserRequest as RequestsStoreUserRequest;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller implements HasMiddleware
@@ -117,7 +117,35 @@ class UserController extends Controller implements HasMiddleware
             'name' => $data['name'],
             'email' => $data['email'],
         ]);
+        
+        $currentIsAdmin = $user->roles()
+            ->where('name', 'admin')
+            ->exists();
 
+
+        $newRoleIsAdmin = Role::where('id', $request->role)
+            ->where('name', 'admin')
+            ->exists();
+
+
+        if ($currentIsAdmin && ! $newRoleIsAdmin) {
+
+            $adminCount = User::whereHas('roles', function ($query) {
+                $query->where('name', 'admin');
+            })->count();
+
+
+            if ($adminCount <= 1) {
+
+                return back()->with(
+                    'error',
+                    'آخرین مدیر سیستم نمی‌تواند نقش خود را تغییر دهد'
+                );
+            }
+        }
+
+
+        
         $user->roles()->sync($data['roles'] ?? []);
 
         return to_route('users.index')->with('success', 'کاربر با موفقیت ویرایش شد');
@@ -128,8 +156,34 @@ class UserController extends Controller implements HasMiddleware
      */
     public function destroy(User $user)
     {
+        $isAdmin = $user->roles()
+            ->where('name', 'admin')
+            ->exists();
+
+
+        if ($isAdmin) {
+
+            $adminCount = User::whereHas('roles', function ($query) {
+                $query->where('name', 'admin');
+            })->count();
+
+
+            if ($adminCount <= 1) {
+
+                return back()->with(
+                    'error',
+                    'آخرین مدیر سیستم قابل حذف نیست'
+                );
+            }
+        }
+
+
         $user->delete();
 
-        return to_route('users.index')->with('success', 'کاربر با موفقیت حذف شد');
+
+        return back()->with(
+            'success',
+            'کاربر حذف شد'
+        );
     }
 }
