@@ -33,6 +33,7 @@ class StoreProductRequest extends FormRequest
             ],
             'category_id' => ['required', 'exists:categories,id'],
             'image' => ['nullable', 'image', 'max:2048'],
+            'stock' => ['required','integer','min:0'],
         ];
     }
 }

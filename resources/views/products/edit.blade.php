@@ -13,8 +13,7 @@
     <form
         action="{{ route('products.update', $product) }}"
         method="POST"
-        enctype="multipart/form-data"
-    >
+        enctype="multipart/form-data">
 
         @csrf
         @method('PATCH')
@@ -28,28 +27,27 @@
 
 
             @php
-                $hasImage =
-                    $product->image &&
-                    $product->image->path &&
-                    Storage::disk('public')->exists($product->image->path);
+            $hasImage =
+            $product->image &&
+            $product->image->path &&
+            Storage::disk('public')->exists($product->image->path);
             @endphp
 
 
             @if ($hasImage)
 
-                <img
-                    src="{{ asset('storage/' . $product->image->path) }}"
-                    alt="{{ $product->title }}"
-                    width="70"
-                    height="70"
-                    style="object-fit:cover; border-radius:8px;"
-                >
+            <img
+                src="{{ asset('storage/' . $product->image->path) }}"
+                alt="{{ $product->title }}"
+                width="70"
+                height="70"
+                style="object-fit:cover; border-radius:8px;">
 
             @else
 
-                <span style="color:red;">
-                    بدون تصویر
-                </span>
+            <span style="color:red;">
+                بدون تصویر
+            </span>
 
             @endif
 
@@ -60,8 +58,7 @@
             name="image"
             label="تصویر جدید"
             type="file"
-            class="form-input"
-        />
+            class="form-input" />
 
 
         <x-input
@@ -69,8 +66,7 @@
             label="عنوان محصول"
             placeholder="مثلا آیفون 15"
             :value="$product->title"
-            class="form-input"
-        />
+            class="form-input" />
 
 
         <x-input
@@ -79,17 +75,21 @@
             label="قیمت"
             placeholder="قیمت محصول"
             :value="$product->price"
-            class="form-input"
-        />
+            class="form-input" />
 
+
+        <x-input
+            name="stock"
+            label="موجودی"
+            type="number"
+            :value="$product->stock" />
 
         <x-select
             name="category_id"
             label="دسته بندی"
             placeholder="انتخاب دسته بندی"
             :options="$categories->pluck('title', 'id')"
-            :value="$product->category_id"
-        />
+            :value="$product->category_id" />
 
 
         <x-select
@@ -99,14 +99,12 @@
                 1 => 'فعال',
                 0 => 'غیرفعال',
             ]"
-            :value="$product->status"
-        />
+            :value="$product->status" />
 
 
         <x-button
             type="submit"
-            class="submit-button"
-        >
+            class="submit-button">
             بروزرسانی محصول
         </x-button>
 

@@ -85,6 +85,12 @@
 
 
 
+                <a href="{{ route('cart.index') }}"
+                    class="{{ request()->routeIs('carts.*') ? 'active' : '' }}">
+                    سبد خرید
+                </a>
+
+
                 {{-- Trash --}}
 
                 <x-can permission="restore_category">

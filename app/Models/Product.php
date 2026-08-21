@@ -17,6 +17,7 @@ class Product extends Model
         'title',
         'status',
         'price',
+        'stock',
         'category_id'
     ];
 

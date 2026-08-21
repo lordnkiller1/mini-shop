@@ -13,8 +13,7 @@
     <form
         action="{{ route('products.store') }}"
         method="POST"
-        enctype="multipart/form-data"
-    >
+        enctype="multipart/form-data">
 
         @csrf
 
@@ -23,16 +22,14 @@
             type="file"
             label="تصویر محصول"
             name="image"
-            class="form-input"
-        />
+            class="form-input" />
 
 
         <x-input
             name="title"
             label="عنوان محصول"
             placeholder="مثلا آیفون 15"
-            class="form-input"
-        />
+            class="form-input" />
 
 
         <x-input
@@ -40,16 +37,19 @@
             name="price"
             label="قیمت"
             placeholder="قیمت محصول"
-            class="form-input"
-        />
+            class="form-input" />
 
+
+        <x-input
+            name="stock"
+            label="موجودی"
+            type="number" />
 
         <x-select
             name="category_id"
             label="دسته بندی"
             placeholder="انتخاب دسته بندی"
-            :options="$categories->pluck('title', 'id')"
-        />
+            :options="$categories->pluck('title', 'id')" />
 
 
         <x-select
@@ -59,14 +59,12 @@
                 1 => 'فعال',
                 0 => 'غیرفعال',
             ]"
-            :value="1"
-        />
+            :value="1" />
 
 
         <x-button
             type="submit"
-            class="submit-button"
-        >
+            class="submit-button">
             ذخیره محصول
         </x-button>
 

@@ -41,6 +41,7 @@ class UpdateProductRequest extends FormRequest
                 'boolean'
             ],
             'image' => ['nullable', 'image', 'max:2048'],
+            'stock' => ['required','integer','min:0'],
         ];
     }
 }
